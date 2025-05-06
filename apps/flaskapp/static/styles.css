@@ -1,0 +1,14 @@
+/* Custom styles if needed */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  input, textarea {
+    outline: none;
+  }
+  
+  textarea:focus, input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+  }
+  

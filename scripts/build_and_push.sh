@@ -4,18 +4,20 @@
 set -e
 
 APP_LOCATION="$1"
-IMAGE_NAME=$(basename "$APP_LOCATION")
-IMAGE_FULL_NAME="${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
-
-APP_TYPE=$(cat ./config/app_type.txt)
-echo "Building app of type: $APP_TYPE"
-
-source ./config/.env
 
 if [[ ! -f "./config/.env" || ! -f "./config/app_type.txt" ]]; then
   echo "Missing config files. Make sure .env and app_type.txt exist."
   exit 1
 fi
+
+source ./config/.env
+
+IMAGE_NAME=$(basename "$APP_LOCATION")
+IMAGE_TAG="${IMAGE_TAG:-latest}"
+IMAGE_FULL_NAME="${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
+
+APP_TYPE=$(cat ./config/app_type.txt)
+echo "Building app of type: $APP_TYPE"
 
 if [[ ! -f $1/Dockerfile ]]; then
     echo "No Dockerfile found in $1"
