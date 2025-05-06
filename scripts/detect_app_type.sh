@@ -1,7 +1,8 @@
 #!/bin/bash
 #Script to check app type.
 
-path="./autodeploy-lite/apps/app1"
+path="$1"
+targetdir="./config/app_type.txt"
 
 if [[ ! -d "$path" ]]; then
     echo "Directory does not exist: $path"
@@ -9,16 +10,16 @@ if [[ ! -d "$path" ]]; then
 fi
 
 if [[ -f "$path/requirements.txt" ]]; then
-    echo "Python App Detected"
+    echo "Python" > $targetdir
     exit 0
 elif [[ -f "$path/package.json" ]]; then
-    echo "NodeJS App Detected"
+    echo "NodeJS" > $targetdir
     exit 0
 elif [[ -f "$path/pom.xml" ]]; then
-    echo "Java App Detected"
+    echo "Java" > $targetdir
     exit 0
 elif [[ -f "$path/go.mod" ]]; then
-    echo "Golang App Detected"
+    echo "Golang" > $targetdir
     exit 0
 else
     echo "No App Detected in directory, Kindly specify correct directory"
