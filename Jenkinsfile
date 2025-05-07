@@ -44,5 +44,20 @@ pipeline {
                 }
             }
         }
+        stage("Deploy to VM") {
+            steps {
+                sshagent(['my-ssh-key']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no vetrax@192.168.4.50 '
+                            docker pull anunukemsam/flaskapp:${TAG} &&
+                            docker stop flaskapp || true &&
+                            docker rm flaskapp || true &&
+                            docker run -d --name flaskapp -p 80:5000 anunukemsam/flaskapp:${TAG}
+                        '
+                    '''
+                }
+            }
+        }
+
     }
 }
