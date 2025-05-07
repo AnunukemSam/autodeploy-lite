@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo "Building docker image..."
                 script {
-                    def image = docker.build("${IMAGE_NAME}:${TAG}", "apps/flaskapp")
+                    image = docker.build("${IMAGE_NAME}:${TAG}", "apps/flaskapp")
                 }
             }
         }
