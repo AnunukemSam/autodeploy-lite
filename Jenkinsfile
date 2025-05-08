@@ -48,11 +48,11 @@ pipeline {
             steps {
                 sshagent(['my-ssh-key']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no vetrax@192.168.2.77 '
+                        ssh -o StrictHostKeyChecking=no vetrax@192.168.4.50 '
                             docker pull anunukemsam/flaskapp:${TAG} &&
                             docker stop flaskapp || true &&
                             docker rm flaskapp || true &&
-                            docker run -d --name flaskapp -p 80:5000 anunukemsam/flaskapp:${TAG}
+                            docker run -d --name flaskapp -p 9000:5000 anunukemsam/flaskapp:${TAG}
                         '
                     """
                 }
